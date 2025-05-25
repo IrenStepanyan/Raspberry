@@ -40,16 +40,6 @@ This script is similar to **ControlLedButton.py**, but with an added twist: pres
 **Usage:**
 Press the button to toggle the LED on or off. The LED state will change with each button press.
 
-### 4. PotentiometerLed.py
-
-This script allows you to control the brightness of an LED connected to the Raspberry Pi using code, simulating the functionality of a potentiometer. You can adjust the LED brightness dynamically without using a physical potentiometer.
-
-**Hardware setup:**
-- LED connected to one of the GPIO pins (typically GPIO18).
-
-**Usage:**
-Run this script to control the brightness of the LED. The brightness will be adjusted through code rather than manual control.
-
 ## Installation
 
 1. Clone the repository:
