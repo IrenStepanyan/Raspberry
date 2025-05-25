@@ -1,66 +1,36 @@
 # Raspberry
-# Raspberry Pi Projects - GPIO Control
 
-This repository contains Python scripts for controlling hardware connected to a Raspberry Pi. These scripts demonstrate basic input and output (I/O) functionality using buttons and LEDs, as well as controlling LED brightness through code.
+This repository contains Python scripts for interfacing and communicating with various sensors and devices using a Raspberry Pi. It demonstrates sensor data acquisition using I2C, SPI, and UART protocols, and serial communication with a particulate matter sensor.
 
-## Project Overview
+## Contents
 
-The repository includes four Python scripts that interact with the Raspberry Pi's GPIO pins. These scripts are designed to control LEDs using buttons, toggle their states, and simulate potentiometer control for LED brightness. Below is a description of each file:
+- **2BME280_I2C.py**  
+  Reads environmental data from two BME280 sensors via I2C at different addresses. It outputs temperature, humidity, pressure, and estimated altitude from both sensors simultaneously.
 
-### 1. ButtonRead.py
+- **I2C_BME280.py**  
+  Reads environmental data from a single BME280 sensor over I2C, printing temperature, humidity, pressure, and estimated altitude.
 
-This script monitors a button connected to GPIO4 on the Raspberry Pi. It checks whether the button is pressed or not, providing feedback on the state of the button.
+- **mcp.py**  
+  Interfaces with an MCP3008 ADC over SPI to read analog signals from two channels (e.g., potentiometer and LDR). Prints raw ADC values and corresponding voltages.  
+  *(Note: PWM-related code is included but commented out.)*
 
-**Hardware setup:**
-- One leg of the button is connected to GND.
-- The other leg of the button is connected to GPIO4.
+- **mcp3008.py**  
+  Demonstrates reading from MCP3008 ADC channel 0 and uses the value to control the brightness of an LED via PWM on a Raspberry Pi GPIO pin.
 
-**Usage:**
-Run this script to check if the button is pressed or not. The state of the button will be displayed in the terminal.
+- **pms5003.py**  
+  Reads particulate matter data from a PMS5003 sensor via UART serial port. Continuously outputs PM1.0, PM2.5, and PM10 concentrations in μg/m³.
 
-### 2. ControlLedButton.py
+---
 
-This script controls an LED connected to GPIO18 with a button on GPIO17. When the button is pressed, the LED will turn on, and when the button is released, the LED will turn off.
+## Prerequisites
 
-**Hardware setup:**
-- Button is connected to GPIO17.
-- LED is connected to GPIO18.
+- Raspberry Pi with Python 3 installed
+- `adafruit-circuitpython-bme280` library for BME280 sensor support
+- `spidev` Python module for SPI communication
+- `RPi.GPIO` Python module for GPIO control and PWM
+- `pyserial` Python module for UART serial communication
 
-**Usage:**
-Press the button to turn the LED on, and release it to turn the LED off. The state of the LED will directly correspond to the state of the button.
-
-### 3. LedSwitchButton.py
-
-This script is similar to **ControlLedButton.py**, but with an added twist: pressing the button will toggle the LED state on or off. Each time the button is pressed, the LED will switch its state.
-
-**Hardware setup:**
-- Button is connected to GPIO17.
-- LED is connected to GPIO18.
-
-**Usage:**
-Press the button to toggle the LED on or off. The LED state will change with each button press.
-
-## Installation
-
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/IrenStepanyan/Raspberry.git
-    ```
-
-2. Navigate into the project folder:
-    ```bash
-    cd Raspberry
-    ```
-
-3. Ensure you have the necessary libraries installed:
-    - Install the Raspberry Pi GPIO library:
-      ```bash
-      sudo apt-get install python3-rpi.gpio
-      ```
-
-## Usage
-
-To run any of the scripts, use the following command format:
+Install required Python packages with:
 
 ```bash
-python3 script_name.py
+pip3 install adafruit-circuitpython-bme280 spidev RPi.GPIO pyserial
